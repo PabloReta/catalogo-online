@@ -2,12 +2,17 @@ import React from 'react';
 
 function ProductoCard({ producto }) {
   return (
-    <div className="bg-white rounded-lg shadow p-4 flex flex-col items-center text-center">
-      <img src={producto.imagen} alt={producto.nombre} className="w-32 h-32 object-cover rounded mb-2" />
-      <h2 className="font-semibold">{producto.nombre}</h2>
-      <p className="text-lg text-green-700 font-bold">${producto.precio}</p>
+    <div className="border rounded-xl p-4 shadow-md bg-white">
+      <img
+        src={producto.imagen || 'https://via.placeholder.com/300x300?text=Producto'}
+        alt={producto.nombre}
+        className="w-full h-48 object-cover mb-2 rounded"
+      />
+      <h3 className="text-lg font-bold">{producto.nombre}</h3>
+      <p className="text-gray-700">Precio: ${producto.precio}</p>
     </div>
   );
 }
 
 export default ProductoCard;
+

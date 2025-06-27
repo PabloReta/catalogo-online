@@ -5,11 +5,20 @@ import axios from 'axios';
 function Catalogo() {
   const [productos, setProductos] = useState([]);
 
-  useEffect(() => {
-    axios.get('http://localhost:5000/api/productos') // Asegurate que coincida con tu backend
-      .then(res => setProductos(res.data))
-      .catch(err => console.error(err));
-  }, []);
+useEffect(() => {
+  fetch('/catalogo/datos/productos.json')
+    .then(res => res.json())
+    .then(data => {
+      const productosFormateados = data.map(item => ({
+        nombre: item['DESCRIPCION'],
+        precio: item['P.RAM'],
+        imagen: item['IMAGEN']
+      }));
+      setProductos(productosFormateados);
+    })
+    .catch(error => console.error('Error cargando productos:', error));
+}, []);
+
 
   return (
     <div className="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
